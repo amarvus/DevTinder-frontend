@@ -8,6 +8,7 @@ import { API_URL } from "../utils/constants";
 const Login = () => {
   const [emailId, setEmailId] = useState("aamir@gmail.com");
   const [password, setPassword] = useState("Aamir@123");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -27,6 +28,7 @@ const Login = () => {
       dispatch(addUser(res.data));
       navigate("/");
     } catch (err) {
+      setError("Invalid credentials. Please try again.");
       console.error(err);
     }
   };
@@ -58,6 +60,7 @@ const Login = () => {
               />
             </fieldset>
           </div>
+          <p className="text-red-500">{error}</p>
           <div className="card-actions justify-center mt-0.5">
             <button className="btn btn-primary" onClick={handleLogin}>
               login
