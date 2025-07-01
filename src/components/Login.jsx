@@ -46,7 +46,6 @@ const Login = () => {
                 value={emailId}
                 className="input"
                 onChange={(e) => setEmailId(e.target.value)}
-                placeholder="Type here"
               />
             </fieldset>
             <fieldset className="fieldset my-2">
@@ -56,7 +55,6 @@ const Login = () => {
                 value={password}
                 className="input"
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Type here"
               />
             </fieldset>
           </div>
