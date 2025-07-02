@@ -1,12 +1,24 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addRequest } from "../utils/requestSlice";
+import { addRequest, removeRequest } from "../utils/requestSlice";
 import { API_URL } from "../utils/constants";
 
 const Requests = () => {
   const requests = useSelector((store) => store.requests);
   const dispatch = useDispatch();
+
+  const reviewRequest = async (status, _id) => {
+    try {
+      const res = await axios.post(
+        API_URL + "/request/review/" + status + "/" + _id,
+        {},
+        { withCredentials: true }
+      );
+
+      dispatch(removeRequest(_id));
+    } catch (err) {}
+  };
 
   const fetchRequests = async () => {
     try {
@@ -25,7 +37,8 @@ const Requests = () => {
     fetchRequests();
   }, []);
 
-  if (!requests || requests.length === 0) return <h1>No Request Found!</h1>;
+  if (!requests || requests.length === 0)
+    return <h1 className="text-center my-10">No Requests Found!</h1>;
 
   return (
     <div className="text-center my-10">
@@ -59,10 +72,16 @@ const Requests = () => {
               </div>
             </div>
             <div className="mr-2">
-              <button className="btn btn-outline btn-secondary mx-2">
+              <button
+                className="btn btn-outline btn-secondary mx-2"
+                onClick={() => reviewRequest("accepted", request._id)}
+              >
                 Accept
               </button>
-              <button className="btn btn-outline btn-primary mxx-2">
+              <button
+                className="btn btn-outline btn-primary mxx-2"
+                onClick={() => reviewRequest("rejected", request._id)}
+              >
                 Reject
               </button>
             </div>
