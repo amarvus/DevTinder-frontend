@@ -34,11 +34,14 @@ const Connections = () => {
         const { firstName, lastName, profilePicture, _id, about, age, gender } =
           connection;
         return (
-          <div className="flex m-4 p-4 rounded-xl bg-base-300 w-4/12 mx-auto">
+          <div
+            key={_id}
+            className="flex m-4 p-4 rounded-xl bg-base-300 w-4/12 mx-auto"
+          >
             <div>
               <img
                 alt="User Profile"
-                className="w-20 h-20 rounded-full"
+                className="w-20 h-20 rounded-full object-cover"
                 src={
                   profilePicture ||
                   "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
