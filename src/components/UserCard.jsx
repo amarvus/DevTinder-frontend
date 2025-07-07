@@ -5,17 +5,18 @@ import { removeUserFromFeed } from "../utils/feedSlice";
 
 const UserCard = ({ user }) => {
   //console.log(user);
-  const { firstName, lastName, age, about, gender, _id } = user;
+  const { firstName, lastName, age, about, gender, _id, profilePicture } = user;
   const dispatch = useDispatch();
 
   const handleSendRequest = async (status, userId) => {
     try {
-      const res = await axios.post(
+      const _res = await axios.post(
         API_URL + "/request/send/" + status + "/" + userId,
         {},
         { withCredentials: true }
       );
       dispatch(removeUserFromFeed(userId));
+      //console.log(res.data);
     } catch (err) {
       console.error(err);
     }
@@ -25,7 +26,7 @@ const UserCard = ({ user }) => {
       <div className="card bg-base-200 w-85 h-110 shadow-sm">
         <figure>
           <img
-            src={user?.user?.profilePicture}
+            src={profilePicture}
             alt="userImage"
             className="w-full h-64 object-cover"
           />

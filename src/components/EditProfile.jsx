@@ -1,18 +1,19 @@
 import { useState } from "react";
-import UserCard from "./userCard";
+import UserCard from "./UserCard";
 import axios from "axios";
 import { API_URL } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 
 const EditProfile = ({ user }) => {
-  const [firstName, setFirstName] = useState(user?.firstName || "");
-  const [lastName, setLastName] = useState(user?.lastName || "");
-  const [age, setAge] = useState(user?.age || "");
-  const [gender, setGender] = useState(user?.gender || "");
-  const [about, setAbout] = useState(user?.about || "");
+  const [firstName, setFirstName] = useState(user.firstName || "");
+  const [lastName, setLastName] = useState(user.lastName || "");
+  const [age, setAge] = useState(user.age || "");
+  const [gender, setGender] = useState(user.gender || "");
+  const [about, setAbout] = useState(user.about || "");
   const [profilePicture, setProfilePicture] = useState(
-    user?.profilePicture || ""
+    user.profilePicture ||
+      "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
   );
   const [error, setError] = useState();
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const EditProfile = ({ user }) => {
       );
 
       dispatch(addUser(res?.data?.data));
+      console.log(res?.data?.data);
     } catch (err) {
       setError(err?.response?.data);
     }

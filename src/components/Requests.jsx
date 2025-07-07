@@ -10,14 +10,16 @@ const Requests = () => {
 
   const reviewRequest = async (status, _id) => {
     try {
-      const res = await axios.post(
+      const _res = await axios.post(
         API_URL + "/request/review/" + status + "/" + _id,
         {},
         { withCredentials: true }
       );
 
       dispatch(removeRequest(_id));
-    } catch (err) {}
+    } catch (err) {
+      console.error("Error: ", err);
+    }
   };
 
   const fetchRequests = async () => {

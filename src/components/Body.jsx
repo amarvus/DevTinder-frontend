@@ -20,7 +20,7 @@ const Body = () => {
     } catch (err) {
       if (err.status === 401) {
         // User is not authenticated, redirect to login
-        navigate("/login");
+        return navigate("/login");
       }
       console.error("Error fetching user data:", err);
     }
